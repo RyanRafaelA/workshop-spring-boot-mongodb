@@ -31,6 +31,12 @@ public class ServicoUsuario {
 		return repo.insert(obj);
 	}
 	
+	public void deletar(String id) {
+		encontradoPorId(id);
+		
+		repo.deleteById(id);
+	}
+	
 	public Usuario paraDTO(UsuarioDTO objDto) {
 		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getEmail());
 	}

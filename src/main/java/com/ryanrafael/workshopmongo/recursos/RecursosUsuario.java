@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,7 @@ public class RecursosUsuario {
 		
 		return ResponseEntity.ok().body(new UsuarioDTO(obj));
 	}
+	
 	@PostMapping
 	public ResponseEntity<Void> inserir(@RequestBody UsuarioDTO objDto){
 		Usuario obj = servico.paraDTO(objDto);
@@ -48,5 +50,12 @@ public class RecursosUsuario {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@DeleteMapping(value="/{id}")
+	public ResponseEntity<Void> deletar(@PathVariable String id){
+		servico.deletar(id);
+		
+		return ResponseEntity.noContent().build();
 	}
 }
