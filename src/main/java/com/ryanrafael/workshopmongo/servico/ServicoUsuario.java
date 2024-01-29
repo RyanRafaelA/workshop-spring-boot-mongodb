@@ -21,11 +21,8 @@ public class ServicoUsuario {
 	}
 	
 	public Usuario encontradoPorId(String id) {
-		Optional<Usuario> usuario = repo.findById(id);
-		if(usuario == null) {
-			throw new ObjetoNaoEncontradoExcecao("Objeto não encontrado");
-		}
+		Optional<Usuario> obj = repo.findById(id);
 		
-		return usuario.get();
+		return obj.orElseThrow(() -> new ObjetoNaoEncontradoExcecao("Objeto não encontrado"));
 	}
 }
