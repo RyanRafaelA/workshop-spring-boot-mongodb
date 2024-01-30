@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.ryanrafael.workshopmongo.dominio.Publicar;
 import com.ryanrafael.workshopmongo.dominio.Usuario;
+import com.ryanrafael.workshopmongo.dto.AutorDTO;
 import com.ryanrafael.workshopmongo.repositorio.RepositorioPublicar;
 import com.ryanrafael.workshopmongo.repositorio.RepositorioUsuario;
 
@@ -25,6 +26,7 @@ public class Instanciacao implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		usuarioRepositorio.deleteAll();
+		publicarRepositorio.deleteAll();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -33,10 +35,11 @@ public class Instanciacao implements CommandLineRunner{
 		Usuario alex = new Usuario(null, "Alex Green", "alex@gmail.com");
 		Usuario bob = new Usuario(null, "Bob Grey", "bob@gmail.com");
 		
-		Publicar pub1 = new Publicar(null, sdf.parse("21/03/2018"), "Partiu Viagem", "Vou viajar para São Paulo. Abraços!", maria);
-		Publicar pub2 = new Publicar(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", maria);
-		
 		usuarioRepositorio.saveAll(Arrays.asList(maria, alex, bob));
+		
+		Publicar pub1 = new Publicar(null, sdf.parse("21/03/2018"), "Partiu Viagem", "Vou viajar para São Paulo. Abraços!", new AutorDTO(maria));
+		Publicar pub2 = new Publicar(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AutorDTO(maria));
+		
 		publicarRepositorio.saveAll(Arrays.asList(pub1, pub2));
 	}
 	
