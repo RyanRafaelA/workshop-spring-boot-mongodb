@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.ryanrafael.workshopmongo.dominio.Publicar;
 import com.ryanrafael.workshopmongo.dominio.Usuario;
 import com.ryanrafael.workshopmongo.dto.AutorDTO;
+import com.ryanrafael.workshopmongo.dto.ComentarioDTO;
 import com.ryanrafael.workshopmongo.repositorio.RepositorioPublicar;
 import com.ryanrafael.workshopmongo.repositorio.RepositorioUsuario;
 
@@ -39,6 +40,13 @@ public class Instanciacao implements CommandLineRunner{
 		
 		Publicar pub1 = new Publicar(null, sdf.parse("21/03/2018"), "Partiu Viagem", "Vou viajar para São Paulo. Abraços!", new AutorDTO(maria));
 		Publicar pub2 = new Publicar(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AutorDTO(maria));
+		
+		ComentarioDTO c1 = new ComentarioDTO("Boa viagem mano!", sdf.parse("21/03/2018"), new AutorDTO(alex));
+		ComentarioDTO c2 = new ComentarioDTO("Aproveite", sdf.parse("22/03/2018"), new AutorDTO(bob));
+		ComentarioDTO c3 = new ComentarioDTO("Tenha um ótimo dia!", sdf.parse("23/03/2018"), new AutorDTO(alex));
+		
+		pub1.getComentario().addAll(Arrays.asList(c1, c2));
+		pub2.getComentario().addAll(Arrays.asList(c3));
 		
 		publicarRepositorio.saveAll(Arrays.asList(pub1, pub2));
 		
