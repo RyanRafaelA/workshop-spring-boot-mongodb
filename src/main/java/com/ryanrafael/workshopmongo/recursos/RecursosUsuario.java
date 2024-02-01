@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.ryanrafael.workshopmongo.dominio.Publicar;
 import com.ryanrafael.workshopmongo.dominio.Usuario;
 import com.ryanrafael.workshopmongo.dto.UsuarioDTO;
 import com.ryanrafael.workshopmongo.servico.ServicoUsuario;
@@ -68,5 +69,12 @@ public class RecursosUsuario {
 		obj = servico.atualizar(obj);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value="/{id}/publicacao")
+	public ResponseEntity<List<Publicar>> buscaPorPublicacao(@PathVariable String id){
+		Usuario obj = servico.encontradoPorId(id);
+		
+		return ResponseEntity.ok().body(obj.getPublicar());
 	}
 }
