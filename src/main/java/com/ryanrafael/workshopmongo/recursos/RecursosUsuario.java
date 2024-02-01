@@ -71,7 +71,7 @@ public class RecursosUsuario {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping(value="/{id}/publicacao")
+	@GetMapping(value="/{id}/publicacoes")
 	public ResponseEntity<List<Publicar>> buscaPorPublicacao(@PathVariable String id){
 		Usuario obj = servico.encontradoPorId(id);
 		
