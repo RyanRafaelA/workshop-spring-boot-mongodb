@@ -41,6 +41,10 @@ public class Instanciacao implements CommandLineRunner{
 		Publicar pub2 = new Publicar(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AutorDTO(maria));
 		
 		publicarRepositorio.saveAll(Arrays.asList(pub1, pub2));
+		
+		maria.getPublicar().addAll(Arrays.asList(pub1, pub2));
+		
+		usuarioRepositorio.save(maria);
 	}
 	
 

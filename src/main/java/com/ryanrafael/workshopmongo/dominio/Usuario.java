@@ -1,8 +1,11 @@
 package com.ryanrafael.workshopmongo.dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -13,6 +16,9 @@ public class Usuario implements Serializable{
 	private String id;
 	private String email;
 	private String nome;
+	
+	@DBRef(lazy=true)
+	private List<Publicar> publicar = new ArrayList<>();
 	
 	public Usuario() {}
 	public Usuario(String id, String nome, String email) {
@@ -39,6 +45,12 @@ public class Usuario implements Serializable{
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public List<Publicar> getPublicar() {
+		return publicar;
+	}
+	public void setPublicar(List<Publicar> publicar) {
+		this.publicar = publicar;
 	}
 	
 	@Override
