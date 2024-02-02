@@ -30,7 +30,7 @@ public class RecursosUsuario {
 	
 	@GetMapping
 	public ResponseEntity<List<UsuarioDTO>> buscaTodos(){
-		List<Usuario> lista = servico.encontraTudo();
+		List<Usuario> lista = servico.buscarTudo();
 		
 		List<UsuarioDTO> listaDto = lista.stream().map(x -> new UsuarioDTO(x)).collect(Collectors.toList());
 		
@@ -39,7 +39,7 @@ public class RecursosUsuario {
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<UsuarioDTO> buscaPorId(@PathVariable String id){
-		Usuario obj = servico.encontradoPorId(id);
+		Usuario obj = servico.buscarPorId(id);
 		
 		return ResponseEntity.ok().body(new UsuarioDTO(obj));
 	}
@@ -73,7 +73,7 @@ public class RecursosUsuario {
 	
 	@GetMapping(value="/{id}/publicacoes")
 	public ResponseEntity<List<Publicar>> buscaPorPublicacao(@PathVariable String id){
-		Usuario obj = servico.encontradoPorId(id);
+		Usuario obj = servico.buscarPorId(id);
 		
 		return ResponseEntity.ok().body(obj.getPublicar());
 	}

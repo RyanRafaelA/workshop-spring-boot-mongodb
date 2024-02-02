@@ -1,5 +1,6 @@
 package com.ryanrafael.workshopmongo.servico;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,13 @@ public class ServicoPublicar {
 	@Autowired
 	private RepositorioPublicar repo;
 
-	public Publicar encontradoPorId(String id) {
+	public Publicar buscarPorId(String id) {
 		Optional<Publicar> obj = repo.findById(id);
 
 		return obj.orElseThrow(() -> new ObjetoNaoEncontradoExcecao("Objeto não encontrado"));
+	}
+	
+	public List<Publicar> buscarPorTitulo(String texto){
+		return repo.findByTituloContainingIgnoreCase(texto);
 	}
 }

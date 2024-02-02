@@ -17,11 +17,11 @@ public class ServicoUsuario {
 	@Autowired
 	private RepositorioUsuario repo;
 
-	public List<Usuario> encontraTudo() {
+	public List<Usuario> buscarTudo() {
 		return repo.findAll();
 	}
 
-	public Usuario encontradoPorId(String id) {
+	public Usuario buscarPorId(String id) {
 		Optional<Usuario> obj = repo.findById(id);
 
 		return obj.orElseThrow(() -> new ObjetoNaoEncontradoExcecao("Objeto não encontrado"));
@@ -50,7 +50,7 @@ public class ServicoUsuario {
 	}
 
 	public void deletar(String id) {
-		encontradoPorId(id);
+		buscarPorId(id);
 
 		repo.deleteById(id);
 	}
