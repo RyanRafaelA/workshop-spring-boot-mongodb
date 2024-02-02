@@ -23,6 +23,6 @@ public class ServicoPublicar {
 	}
 	
 	public List<Publicar> buscarPorTitulo(String texto){
-		return repo.findByTituloContainingIgnoreCase(texto);
+		return repo.procurarTitulo(texto);
 	}
 }
